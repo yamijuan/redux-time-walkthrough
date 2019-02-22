@@ -9,23 +9,23 @@ import {Animate} from 'redux-time/node/animations'
 // 1. Create a redux store, and start the animation runloop with initial state
 const store = createStore(combineReducers({animations: animationsReducer}))
 
-const initial_state = {ball: {style: {}}}
+const initial_state = {ball: {style: {top:0}}}
 const time = startAnimation(store, initial_state)
 
 // 2. Set up our first animation
-const move_ball_animation = Animate({
-    // move the ball 20px down over 1s
-    path: '/ball/style/top',
-    start_state: 0,
-    end_state: 100,
-    duration: 5000,
-})
+const move_ball_animation = () =>
+    Animate({
+        // move the ball 20px down over 1s
+        path: '/ball/style/top',
+        start_state: 0,
+        end_state: 100,
+        duration: 5000,
+    })
 
 document.onkeypress = (e) => {
     // trigger it when the down arrow is pressed
     if (e.keyCode == 13) {
-        console.log("keypress", e.keyCode)
-        store.dispatch({type: 'ANIMATE', animation: move_ball_animation})
+        store.dispatch({type: 'ANIMATE', animation: move_ball_animation()})
     }
 }
 
@@ -33,13 +33,11 @@ document.onkeypress = (e) => {
 const BallComponent = ({ball}) =>
     <div id="ball" style={{position: 'absolute', ...ball.style}}></div>
 
-const mapStateToProps = ({animations}) => {
-    console.log(animations.state.ball.style)
-    return {
-        ball: animations.state.ball,
-        // optionally deepMerge(yaother_state, animations.state)
-    }
-}
+const mapStateToProps = ({animations}) => ({
+    ball: animations.state.ball,
+    // optionally deepMerge(yaother_state, animations.state)
+})
+
 const Ball = connect(mapStateToProps)(BallComponent)
 
 // 4. Then render it
