@@ -1,2 +1,2 @@
-# redux-time-walkthrought
-Walkthrought and slides about redux-time
+# redux-time-walkthrough
+Walkthrough and slides about redux-time

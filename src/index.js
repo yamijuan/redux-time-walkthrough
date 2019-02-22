@@ -23,7 +23,7 @@ const move_ball_animation = () =>
     })
 
 document.onkeypress = (e) => {
-    // trigger it when the down arrow is pressed
+    // trigger it when enter is pressed
     if (e.keyCode == 13) {
         store.dispatch({type: 'ANIMATE', animation: move_ball_animation()})
     }
@@ -35,7 +35,7 @@ const BallComponent = ({ball}) =>
 
 const mapStateToProps = ({animations}) => ({
     ball: animations.state.ball,
-    // optionally deepMerge(yaother_state, animations.state)
+    // optionally deepMerge(other_state, animations.state)
 })
 
 const Ball = connect(mapStateToProps)(BallComponent)
