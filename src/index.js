@@ -13,7 +13,7 @@ const initial_state = {ball: {style: {top:0}}}
 const time = startAnimation(store, initial_state)
 
 // 2. Set up our first animation
-const move_ball_animation = () =>
+const moveBallAnimation = () =>
     Animate({
         // move the ball 100px down over 5s
         path: '/ball/style/top',
@@ -25,7 +25,7 @@ const move_ball_animation = () =>
 document.onkeypress = (e) => {
     // trigger it when enter is pressed
     if (e.keyCode == 13) {
-        store.dispatch({type: 'ANIMATE', animation: move_ball_animation()})
+        store.dispatch({type: 'ANIMATE', animation: moveBallAnimation()})
     }
 }
 
